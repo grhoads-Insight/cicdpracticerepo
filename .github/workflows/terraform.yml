@@ -121,21 +121,25 @@ jobs:
 
 
   deployPlan:
-    name: "Deploy Plan"
+    name: 'Deploy Plan'
     runs-on: ubuntu-latest
     environment: production
 
     defaults:
       run:
         shell: bash
-        working-directory: iac/terraform
+        working-directory: "iac/terraform"
         
     # if TFPLAN_EXITCODE fails, stop...scrape the output?
     # needs: generatePlan
     # if: needs.generatePlan.outputs.TFPLAN_EXITCODE == 2 # 2 means: run, because changes are detected and there is an error...
 
     steps:  
-      # Checks that all Terraform configuration files adhere to a canonical format
+       # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v3
+       # Checks that all Terraform configuration files adhere to a canonical format 
       - name: Terraform Format
         run: terraform fmt
 
