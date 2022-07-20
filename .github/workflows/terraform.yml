@@ -128,7 +128,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: "iac/terraform"
+        working-directory: "./iac/terraform"
         
     # if TFPLAN_EXITCODE fails, stop...scrape the output?
     # needs: generatePlan
